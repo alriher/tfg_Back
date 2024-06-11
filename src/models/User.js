@@ -1,61 +1,62 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+import { DataTypes } from 'sequelize';
+import sequelize from '../config/database.js';
 
-// Define the User model
 const User = sequelize.define('User', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
     primaryKey: true,
     allowNull: false,
   },
   name: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(255),
+    allowNull: false,
+  },
+  lastName: {
+    type: DataTypes.STRING(255),
     allowNull: false,
   },
   email: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(255),
     allowNull: false,
     unique: true,
     validate: {
-      isEmail: true, // Validates that the value is an email
+      isEmail: true, 
     },
   },
   password: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(255),
     allowNull: false,
   },
   birthdate: {
     type: DataTypes.DATE,
-    allowNull: true,
+    allowNull: true, 
   },
   address: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(255),
     allowNull: true,
   },
   phone: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(20),
     allowNull: true,
   },
-  paymentMethod: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  role: {
-    type: DataTypes.ENUM('resident', 'administrator'),
-    defaultValue: 'resident',
-  },
-  registrationDate: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  },
-  lastLogin: {
-    type: DataTypes.DATE,
-    allowNull: true,
+  isAdmin: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+    allowNull: false,
   },
 }, {
-  timestamps: true, // Adds createdAt and updatedAt fields
-  tableName: 'users', // Custom table name, otherwise Sequelize uses the model name in plural form
+  scopes: {
+    withoutPassword: {
+      attributes: { exclude: ['password'] }
+    },
+    withoutAdmin: {
+      attributes: { exclude: ['isAdmin'] }
+    }
+  },
+  timestamps: true,
+  tableName: 'users',
+  underscored: false,
 });
 
-module.exports = User;
+export default User;

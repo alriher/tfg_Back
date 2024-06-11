@@ -1,0 +1,13 @@
+POST http://localhost:3001/users/createUser HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Ilia",
+    "lastName": "Maquilon Perez",
+    "email": "iliaqui.pe@gmail.com",
+    "password": "test",
+    "birthdate": "2001-05-23",
+    "address": "Plaza Escultor Jose Planes",
+    "phone": "666666666",
+    "isAdmin": "true"
+}
