@@ -1,0 +1,10 @@
+POST http://localhost:3001/spaces/createSpace HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Pista de Tenis",
+    "address": "Polideportivo La Alcayna",
+    "capacity": "4"
+}
+
+// CTRL + ALT + R to send the request

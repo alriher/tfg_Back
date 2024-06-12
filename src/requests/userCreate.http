@@ -11,3 +11,5 @@ content-type: application/json
     "phone": "666666666",
     "isAdmin": "true"
 }
+
+// CTRL + ALT + R to send the request	
