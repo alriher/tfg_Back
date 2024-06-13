@@ -1,10 +1,10 @@
-POST http://localhost:3001/users/createUser HTTP/1.1
+POST http://localhost:3001/users/ HTTP/1.1
 content-type: application/json
 
 {
-    "name": "Ilia",
+    "name": "kdaoijoijsadoidsaojidadoijasdjoias",
     "lastName": "Maquilon Perez",
-    "email": "iliaqui.pe@gmail.com",
+    "email": "iliaqui.pe2@gmail.com",
     "password": "test",
     "birthdate": "2001-05-23",
     "address": "Plaza Escultor Jose Planes",

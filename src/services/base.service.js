@@ -17,6 +17,32 @@ export class BaseService {
         return await this.model.create(model);
     }
 
+    async update(id, updatedModel) {
+        try {
+            const model = await this.model.findByPk(id);
+            if(model) {	
+                return await this.model.update(updatedModel, { where: { id } });
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async delete(id) {
+        try {
+            const model = await this.model.findByPk(id);
+            if(model) {
+                return await this.model.destroy({ where: { id } });
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+
+
+    
+
     // async allUsersWithoutPassword() {
     //     return await this._model.scope(['withoutPassword', 'withoutAdmin']).findAll()
     // }

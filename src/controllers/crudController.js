@@ -22,4 +22,22 @@ export class CrudController {
             res.json({ message: error.message });
         }
     };
+
+    async update(req, res) {
+        try {
+            const updatedModel = await this.service.update(req.params.id, req.body);
+            res.json(updatedModel);
+        } catch (error) {
+            res.json({ message: error.message });
+        }
+    };
+
+    async delete(req, res) {
+        try {
+            const deletedModel = await this.service.delete(req.params.id);
+            res.json(deletedModel);
+        } catch (error) {
+            res.json({ message: error.message });
+        }
+    };
 }

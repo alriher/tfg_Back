@@ -6,9 +6,18 @@ const router = express.Router();
 
 console.log(controller);
 
-// Ruta para crear un nuevo usuario
-router.post('/createSpace', (req, res) => {
-  controller.create(req, res)
+// Ruta para crear un nuevo espacio
+router.post('/', (req, res) => { // Cuando se haga un post a /, se va a ejecutar el método create del controlador. 
+  controller.create(req, res) 
+
+});
+
+router.delete('/:id', (req, res) => { // Cuando se haga un delete a /spaces/:id, se va a ejecutar el método delete del controlador.
+  controller.delete(req, res)
+});
+
+router.put('/:id', (req, res) => {
+  controller.update(req, res)
 });
 
 // // Ruta para obtener un usuario por email
