@@ -1,6 +1,5 @@
 import { CrudController } from './crudController.js';
 import { UserService } from '../services/user.service.js';
-import User from '../models/User.js';
 
 export class UserController extends CrudController {
     constructor()  {

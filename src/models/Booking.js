@@ -10,7 +10,7 @@ const Booking = sequelize.define('Booking', {
     primaryKey: true,
     allowNull: false,
   },
-  user_id: {
+  userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
@@ -18,7 +18,7 @@ const Booking = sequelize.define('Booking', {
       key: 'id',
     },
   },
-  space_id: {
+  spaceId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
@@ -26,22 +26,22 @@ const Booking = sequelize.define('Booking', {
       key: 'id',
     },
   },
-  date_start: {
+  dateStart: {
     type: DataTypes.DATE,
     allowNull: false,
   },
-  date_end: {
+  dateEnd: {
     type: DataTypes.DATE,
     allowNull: false,
   },
 }, {
   timestamps: true, // Añade las columnas `createdAt` y `updatedAt`
   tableName: 'bookings', // Asegura que Sequelize usa el nombre correcto de la tabla
-  underscored: false, // Usa camelCase en lugar de snake_case
+  underscored: true,
 });
 
 // Establece las relaciones
-Booking.belongsTo(User, { foreignKey: 'user_id', onDelete: 'CASCADE' });
-Booking.belongsTo(Space, { foreignKey: 'space_id', onDelete: 'CASCADE' });
+Booking.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
+Booking.belongsTo(Space, { foreignKey: 'spaceId', onDelete: 'CASCADE' });
 
 export default Booking;

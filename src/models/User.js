@@ -8,13 +8,10 @@ const User = sequelize.define('User', {
     primaryKey: true,
     allowNull: false,
   },
-  name: {
+  username: {
     type: DataTypes.STRING(255),
     allowNull: false,
-  },
-  lastName: {
-    type: DataTypes.STRING(255),
-    allowNull: false,
+    unique: true,
   },
   email: {
     type: DataTypes.STRING(255),
@@ -24,6 +21,15 @@ const User = sequelize.define('User', {
       isEmail: true, 
     },
   },
+  name: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+  },
+  lastName: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+  },
+  
   password: {
     type: DataTypes.STRING(255),
     allowNull: false,
@@ -56,7 +62,7 @@ const User = sequelize.define('User', {
   },
   timestamps: true,
   tableName: 'users',
-  underscored: false,
+  underscored: true,
 });
 
 export default User;

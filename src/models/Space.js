@@ -23,7 +23,7 @@ const Space = sequelize.define('Space', {
 }, {
   timestamps: true, // Añade las columnas `createdAt` y `updatedAt`
   tableName: 'spaces', // Asegura que Sequelize usa el nombre correcto de la tabla
-  underscored: false, // Usa camelCase en lugar de snake_case
+  underscored: true,
 });
 
 export default Space;

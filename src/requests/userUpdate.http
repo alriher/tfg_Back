@@ -2,6 +2,7 @@ PUT http://localhost:3001/users/3 HTTP/1.1
 Content-Type: application/json
 
 {
+    "username": "elfomafioso",
     "name": "Ilia",
     "lastName": "Maquilon Perez",
     "email": "iliaqui.pe@gmail.com",
@@ -9,5 +10,6 @@ Content-Type: application/json
     "birthdate": "2001-05-23",
     "address": "Plaza Escultor Jose Planes",
     "phone": "777777777",
-    "isAdmin": "true"}
+    "isAdmin": "true"
+}
 

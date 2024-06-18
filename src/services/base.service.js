@@ -39,6 +39,10 @@ export class BaseService {
         }
     }
 
+    async getById(id) {
+        return await this.model.findByPk(id);
+    }
+
 
 
     
