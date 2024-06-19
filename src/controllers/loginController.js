@@ -36,6 +36,7 @@ export class LoginController {
             const refreshToken = this.tokenService.generateRefreshToken(user);
 
             const tokenRecord = await this.tokenService.getByUserId(user.id);
+
             if (tokenRecord) {
                 await this.tokenService.deleteByToken(tokenRecord.token);
             }

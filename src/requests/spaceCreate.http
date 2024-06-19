@@ -2,9 +2,9 @@ POST http://localhost:3001/spaces/ HTTP/1.1
 content-type: application/json
 
 {
-    "name": "Pista de Tenis",
+    "name": "Pista de Futbol",
     "address": "Polideportivo La Alcayna",
-    "capacity": "4"
+    "capacity": "22"
 }
 
 // CTRL + ALT + R to send the request
