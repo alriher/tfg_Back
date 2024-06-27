@@ -2,8 +2,13 @@ PUT http://localhost:3001/spaces/1 HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "Pista de Tenis",
-    "address": "Polideportivo Altorreal",
-    "capacity": "4"
+    "name": "Pista de Padel",
+    "address": "Polideportivo La Alcayna",
+    "capacity": "4",
+    "provincia": "Murcia",
+    "localidad": "Molina de Segura",
+    "lat": "38.08765694634773", 
+    "lon": "-1.1580197938437922",
+    "img": "images/test.jpg"
 }
 

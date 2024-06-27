@@ -2,9 +2,14 @@ POST http://localhost:3001/spaces/ HTTP/1.1
 content-type: application/json
 
 {
-    "name": "Pista de Futbol",
+    "name": "Pista de Tenis",
     "address": "Polideportivo La Alcayna",
-    "capacity": "22"
+    "capacity": "4",
+    "provincia": "Murcia",
+    "localidad": "Molina de Segura",
+    "lat": "38.08765694634773", 
+    "lon": "-1.1580197938437922",
+    "img": "images/test.jpg"
 }
 
 // CTRL + ALT + R to send the request
