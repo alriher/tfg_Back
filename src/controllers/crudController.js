@@ -40,4 +40,22 @@ export class CrudController {
             res.json({ message: error.message });
         }
     };
+
+    async getAll(req, res) {
+        try {
+            const models = await this.service.getAll();
+            res.json(models);
+        } catch (error) {
+            res.json({ message: error.message });
+        }
+    };
+
+    async getById(req, res) {
+        try {
+            const model = await this.service.getById(req.params.id);
+            res.json(model);
+        } catch (error) {
+            res.json({ message: error.message });
+        }
+    };
 }

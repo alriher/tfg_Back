@@ -8,6 +8,10 @@ const Space = sequelize.define('Space', {
     primaryKey: true,
     allowNull: false,
   },
+  space_id: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
   name: {
     type: DataTypes.STRING(255),
     allowNull: false,
