@@ -33,4 +33,12 @@ export class UserService extends BaseService {
     async getByUsername(username) {
       return await this._model.findOne({ where: { username } });
     }
+
+    async getByEmail(email) {
+      return await this._model.findOne({ where: { email } });
+    }
+
+    async getCuratedUser(id) { 
+      return await this._model.scope(['withoutPassword', 'withoutAdmin']).findByPk(id)
+      }
 }

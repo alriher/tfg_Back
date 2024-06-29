@@ -22,10 +22,10 @@ export class LoginController {
         try {
             console.log(this.tokenService);
             console.log(this.userService);
-            const { username, password } = req.body;
-            const user = await this.userService.getByUsername(username);
+            const { email, password } = req.body;
+            const user = await this.userService.getByEmail(email);
 
-            if (!user) {
+            if (!email) {
                 return Utils.buildMessage(res, 'User not found', 400);
             }
             if (!(await bcrypt.compare(password, user.password))) {
@@ -45,7 +45,7 @@ export class LoginController {
             this.tokenService.setHttpOnlyCookie(res, 'accessToken', accessToken, 5 * 60 * 1000);
             this.tokenService.setHttpOnlyCookie(res, 'refreshToken', refreshToken, 15 * 60 * 1000);
 
-            return res.json(await this.userService.getById(user.id));
+            return res.json(await this.userService.getCuratedUser(user.id));
         }
         catch (error) {
             console.log(error);
