@@ -53,6 +53,31 @@ export class LoginController {
         }
     }
 
+    async register (req, res) {
+        try {
+            const { email, password} = req.body;
+            const user = await this.userService.getByEmail(email);
+            if (user) {
+                return Utils.buildMessage(res, 'User already exists', 400);
+            }
+            const hashedPassword = await bcrypt.hash(password, 10);
+            const newUser = await this.userService.storeUser(email, hashedPassword);
+
+            const accessToken = this.tokenService.generateAccessToken(newUser);
+            const refreshToken = this.tokenService.generateRefreshToken(newUser);
+
+            await this.tokenService.storeRefreshToken(refreshToken, newUser.id);
+
+            this.tokenService.setHttpOnlyCookie(res, 'accessToken', accessToken, 5 * 60 * 1000);
+            this.tokenService.setHttpOnlyCookie(res, 'refreshToken', refreshToken, 15 * 60 * 1000);
+            return res.json(await this.userService.getCuratedUser(user.id));
+        }
+        catch (error) {
+            console.log(error);
+            Utils.buildMessage(res, 'Error', 500);
+        }
+    }
+
     async logout (req, res) {
         const refreshToken = req.cookies["refreshToken"];
         if (!refreshToken) {
@@ -101,4 +126,7 @@ export class LoginController {
             Utils.buildMessage(res, 'Error', 500);
         }
     }
+
+    
+    
 }

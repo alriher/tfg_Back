@@ -25,6 +25,10 @@ router.get('/', (req, res) => {
   controller.getAll(req, res)
 });
 
+router.get('/:id', (req, res) => {
+  controller.getById(req, res)
+});
+
 // // Ruta para obtener un usuario por email
 // router.get('/users/:email', handleGetUserByEmail);
 
