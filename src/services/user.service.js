@@ -12,33 +12,33 @@ export class UserService extends BaseService {
       return this._model;
     }
 
-    async create(model) {
-      model.password = bcrypt.hashSync(model.password, 12);
-      model.birthdate = new Date(model.birthdate);
+    async create(object) {
+      object.password = bcrypt.hashSync(object.password, 12);
+      object.birthdate = new Date(object.birthdate);
 
-      return await this._model.create(model);
+      return await this.model.create(object);
     }
 
-    async update(id, model) {
-      if (model.password) {
-        model.password = bcrypt.hashSync(model.password, 12);
+    async update(id, object) {
+      if (object.password) {
+        object.password = bcrypt.hashSync(object.password, 12);
       }
-      if (model.birthdate) {
-        model.birthdate = new Date(model.birthdate);
+      if (object.birthdate) {
+        object.birthdate = new Date(object.birthdate);
       }
 
-      return await this._model.update(model, { where: { id } });
+      return await this.model.update(object, { where: { id } });
     }
 
     async getByUsername(username) {
-      return await this._model.findOne({ where: { username } });
+      return await this.model.findOne({ where: { username } });
     }
 
     async getByEmail(email) {
-      return await this._model.findOne({ where: { email } });
+      return await this.model.findOne({ where: { email } });
     }
 
     async getCuratedUser(id) { 
-      return await this._model.scope(['withoutPassword', 'withoutAdmin']).findByPk(id)
+      return await this.model.scope(['withoutPassword', 'withoutAdmin']).findByPk(id)
       }
 }

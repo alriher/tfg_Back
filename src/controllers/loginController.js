@@ -2,6 +2,7 @@ import { Utils } from "../utils.js";
 import { UserService } from '../services/user.service.js';
 import { RefreshTokenService } from '../services/refreshToken.service.js';
 import bcrypt from 'bcrypt';
+import User from "../models/User.js";
 
 
 export class LoginController {
@@ -55,13 +56,14 @@ export class LoginController {
 
     async register (req, res) {
         try {
-            const { email, password} = req.body;
-            const user = await this.userService.getByEmail(email);
-            if (user) {
+            const user = req.body;
+            const userCheck = await this.userService.getByEmail(user.email);
+            const userCheck2 = await this.userService.getByUsername(user.username);
+            if (userCheck || userCheck2) {
                 return Utils.buildMessage(res, 'User already exists', 400);
             }
-            const hashedPassword = await bcrypt.hash(password, 10);
-            const newUser = await this.userService.storeUser(email, hashedPassword);
+            
+            const newUser = await this.userService.create(user);
 
             const accessToken = this.tokenService.generateAccessToken(newUser);
             const refreshToken = this.tokenService.generateRefreshToken(newUser);
@@ -70,7 +72,7 @@ export class LoginController {
 
             this.tokenService.setHttpOnlyCookie(res, 'accessToken', accessToken, 5 * 60 * 1000);
             this.tokenService.setHttpOnlyCookie(res, 'refreshToken', refreshToken, 15 * 60 * 1000);
-            return res.json(await this.userService.getCuratedUser(user.id));
+            return res.json(await this.userService.getCuratedUser(newUser.id));
         }
         catch (error) {
             console.log(error);
@@ -126,6 +128,8 @@ export class LoginController {
             Utils.buildMessage(res, 'Error', 500);
         }
     }
+
+        
 
     
     

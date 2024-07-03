@@ -2,10 +2,10 @@ POST http://localhost:3001/users/ HTTP/1.1
 content-type: application/json
 
 {
-    "username": "elfomafioso",
+    "username": "alriher",
     "name": "kdaoijoijsadoidsaojidadoijasdjoias",
     "lastName": "Maquilon Perez",
-    "email": "iliaqui.pe2@gmail.com",
+    "email": "alvarikorikelme@gmail.com",
     "password": "test",
     "birthdate": "2001-05-23",
     "address": "Plaza Escultor Jose Planes",
