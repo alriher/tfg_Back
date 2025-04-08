@@ -60,6 +60,7 @@ export class LoginController {
             const userCheck = await this.userService.getByEmail(user.email);
             const userCheck2 = await this.userService.getByUsername(user.username);
             if (userCheck || userCheck2) {
+                console.log("AQUI")
                 return Utils.buildMessage(res, 'User already exists', 400);
             }
             
