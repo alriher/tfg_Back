@@ -61,7 +61,7 @@ export class LoginController {
             const userCheck2 = await this.userService.getByUsername(user.username);
             if (userCheck || userCheck2) {
                 console.log("AQUI")
-                return Utils.buildMessage(res, 'User already exists', 400);
+                return Utils.buildMessage(res, 'User already exists', 409);
             }
             
             const newUser = await this.userService.create(user);
