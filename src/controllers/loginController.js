@@ -26,7 +26,7 @@ export class LoginController {
             const { email, password } = req.body;
             const user = await this.userService.getByEmail(email);
 
-            if (!email) {
+            if (!user) {
                 return Utils.buildMessage(res, 'User not found', 400);
             }
             if (!(await bcrypt.compare(password, user.password))) {
