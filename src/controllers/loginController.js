@@ -59,8 +59,12 @@ export class LoginController {
             const user = req.body;
             const userCheck = await this.userService.getByEmail(user.email);
             const userCheck2 = await this.userService.getByUsername(user.username);
-            if (userCheck || userCheck2) {
+            if (userCheck && userCheck2) {
                 console.log("AQUI")
+                return Utils.buildMessage(res, 'User and email already exists', 409);
+            } else if (userCheck) {
+                return Utils.buildMessage(res, 'Email already exists', 409);
+            } else if (userCheck2) {
                 return Utils.buildMessage(res, 'User already exists', 409);
             }
             
