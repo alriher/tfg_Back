@@ -2,14 +2,14 @@ POST http://localhost:3001/users/ HTTP/1.1
 content-type: application/json
 
 {
-    "username": "alriher",
-    "name": "kdaoijoijsadoidsaojidadoijasdjoias",
-    "lastName": "Maquilon Perez",
-    "email": "alvarikorikelme@gmail.com",
-    "password": "test",
-    "birthdate": "2001-05-23",
-    "address": "Plaza Escultor Jose Planes",
-    "phone": "666666666",
+    "username": "alriherAdmin",
+    "name": "AlvaroAdmin",
+    "lastName": "Admin",
+    "email": "alvarorikelme25admin@gmail.com",
+    "password": "123456789.Al",
+    "birthdate": "2002-07-31",
+    "address": "Calle Rio Ibor, 37",
+    "phone": "633650556",
     "isAdmin": "true"
 }
 

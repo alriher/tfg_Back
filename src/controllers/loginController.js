@@ -44,7 +44,7 @@ export class LoginController {
             await this.tokenService.storeRefreshToken(refreshToken, user.id);
 
             this.tokenService.setHttpOnlyCookie(res, 'accessToken', accessToken, 5 * 60 * 1000);
-            this.tokenService.setHttpOnlyCookie(res, 'refreshToken', refreshToken, 15 * 60 * 1000);
+            this.tokenService.setHttpOnlyCookie(res, 'refreshToken', refreshToken, 24 * 60 * 60 * 1000);
 
             return res.json(await this.userService.getCuratedUser(user.id));
         }
@@ -76,7 +76,7 @@ export class LoginController {
             await this.tokenService.storeRefreshToken(refreshToken, newUser.id);
 
             this.tokenService.setHttpOnlyCookie(res, 'accessToken', accessToken, 5 * 60 * 1000);
-            this.tokenService.setHttpOnlyCookie(res, 'refreshToken', refreshToken, 15 * 60 * 1000);
+            this.tokenService.setHttpOnlyCookie(res, 'refreshToken', refreshToken, 24 * 60 * 60 * 1000);
             return res.json(await this.userService.getCuratedUser(newUser.id));
         }
         catch (error) {
@@ -124,7 +124,7 @@ export class LoginController {
                 const newRefreshToken = this.tokenService.generateRefreshToken(user);
 
                 this.tokenService.setHttpOnlyCookie(res, 'accessToken', newAccessToken, 5 * 60 * 1000);
-                this.tokenService.setHttpOnlyCookie(res, 'refreshToken', newRefreshToken, 15 * 60 * 1000);
+                this.tokenService.setHttpOnlyCookie(res, 'refreshToken', newRefreshToken, 24 * 60 * 60 * 1000);
 
                 return Utils.buildMessage(res, 'Token refreshed', 200);
             });

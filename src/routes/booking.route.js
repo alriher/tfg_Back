@@ -20,6 +20,10 @@ router.delete('/:id', LoginMiddleware.authorize, (req, res) => { // Cuando se ha
 router.put('/:id', LoginMiddleware.authorize, (req, res) => {
   controller.update(req, res)
 });
+
+router.get('/:id', LoginMiddleware.authorize, (req, res) => {
+  controller.getById(req, res)
+});
 // // Ruta para obtener un usuario por email
 // router.get('/users/:email', handleGetUserByEmail);
 

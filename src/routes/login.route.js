@@ -7,7 +7,7 @@ const router = express.Router();
 console.log(controller);
 
 router.post('/token', (req, res) => { 
-  controller.tokenService(req, res) 
+  controller.token(req, res) 
 
 });
 
