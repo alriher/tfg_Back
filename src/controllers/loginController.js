@@ -3,6 +3,7 @@ import { UserService } from '../services/user.service.js';
 import { RefreshTokenService } from '../services/refreshToken.service.js';
 import bcrypt from 'bcrypt';
 import User from "../models/User.js";
+import jwt from 'jsonwebtoken';
 
 
 export class LoginController {
@@ -112,8 +113,11 @@ export class LoginController {
             if (!oldRefreshToken) {
                 return Utils.buildMessage(res, 'No refresh token', 400);
             }
+            console.log("AQUI1" + oldRefreshToken);
+
             const tokenRecord = await this.tokenService.getByToken(oldRefreshToken);
             if (!tokenRecord || tokenRecord.expiryDate < new Date()) {
+                console.log("AQUI2" + tokenRecord);
                 return Utils.buildMessage(res, 'Invalid refresh token', 403);
             }
             jwt.verify (oldRefreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => { // Revisar porque user no se usa, se supone que seria userPayload.
@@ -130,6 +134,7 @@ export class LoginController {
             });
         }
         catch (error) {
+            console.log(error);
             Utils.buildMessage(res, 'Error', 500);
         }
     }

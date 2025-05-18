@@ -56,6 +56,6 @@ export class RefreshTokenService extends BaseService {
     }
 
     generateRefreshToken(user) {
-        return jwt.sign( { id: user.id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '15m' });
+        return jwt.sign( { id: user.id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '24h' });
     }
 }
