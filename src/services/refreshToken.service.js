@@ -39,7 +39,7 @@ export class RefreshTokenService extends BaseService {
         userId,
     ) {
         const expiryDate = new Date();
-        expiryDate.setMinutes(expiryDate.getMinutes() + 15);
+        expiryDate.setHours(expiryDate.getHours() + 24);
         return await RefreshToken.create({
             token: refreshToken,
             userId,

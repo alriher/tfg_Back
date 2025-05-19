@@ -1,5 +1,6 @@
 import Booking from '../models/Booking.js';
 import { BaseService } from './base.service.js';
+import { Op, fn, col, where } from 'sequelize';
 
 export class BookingService extends BaseService {
     constructor() {
@@ -12,9 +13,21 @@ export class BookingService extends BaseService {
     }
 
     async create(model) {
+      console.log("DATESTART" + model.dateStart);
       model.dateStart = new Date(model.dateStart);
       model.dateEnd = new Date(model.dateEnd);
 
       return await this._model.create(model);
+    }
+
+    async getBySpaceIdAndDate(spaceId, date) {
+        return this.model.findAll({
+            where: {
+                spaceId,
+                [Op.and]: [
+                    where(fn('DATE', col('date_start')), date)
+                ]
+            }
+        });
     }
 }
