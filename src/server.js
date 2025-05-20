@@ -27,7 +27,6 @@ app.use(
 
 
 //Prepara el servidor para leer cookies y entender datos en formato JSON
-// app.use(dateTimezoneMiddleware("Europe/Madrid"));
 
 app.use(cookieParser());
 app.use(express.json());
