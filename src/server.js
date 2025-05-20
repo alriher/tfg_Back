@@ -5,7 +5,6 @@ import userRoutes from "./routes/user.route.js";
 import spaceRoutes from "./routes/space.route.js";
 import bookingRoutes from "./routes/booking.route.js";
 import loginRoutes from "./routes/login.route.js";
-import dateTimezoneMiddleware from "./middlewares/dateConverter.middleware.js";
 
 //Crea la aplicación web.
 const app = express();
