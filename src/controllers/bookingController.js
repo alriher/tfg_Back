@@ -22,6 +22,7 @@ export class BookingController extends CrudController {
             }
 
             const bookings = await this.service.getBySpaceIdAndDate(spaceId, date);
+            // console.log("BOOKINGS" + JSON.stringify(bookings));
             return res.json(bookings);
         } catch (error) {
             return res.status(500).json({ message: "Error fetching bookings", error });

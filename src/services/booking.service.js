@@ -15,6 +15,7 @@ export class BookingService extends BaseService {
     async create(model) {
       console.log("DATESTART" + model.dateStart);
       model.dateStart = new Date(model.dateStart);
+      console.log("DATESTART2" + model.dateStart);
       model.dateEnd = new Date(model.dateEnd);
 
       return await this._model.create(model);
