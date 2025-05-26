@@ -28,6 +28,11 @@ const Booking = sequelize.define(
         key: "id",
       },
     },
+    assistants: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1,
+    },
     dateStart: {
       type: DataTypes.DATE,
       allowNull: false,
