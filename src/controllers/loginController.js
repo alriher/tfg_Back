@@ -120,12 +120,17 @@ export class LoginController {
                 console.log("AQUI2" + tokenRecord);
                 return Utils.buildMessage(res, 'Invalid refresh token', 403);
             }
-            jwt.verify (oldRefreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => { // Revisar porque user no se usa, se supone que seria userPayload.
+            jwt.verify (oldRefreshToken, process.env.REFRESH_TOKEN_SECRET, async (err, user) => { // Revisar porque user no se usa, se supone que seria userPayload.
                 if (err) {
                     return Utils.buildMessage(res, 'Invalid refresh token', 403);
                 }
                 const newAccessToken = this.tokenService.generateAccessToken(user);
                 const newRefreshToken = this.tokenService.generateRefreshToken(user);
+
+                // Borra el refresh token antiguo de la base de datos
+                await this.tokenService.deleteByToken(oldRefreshToken);
+                // Guarda el nuevo refresh token en la base de datos
+                await this.tokenService.storeRefreshToken(newRefreshToken, user.id);
 
                 this.tokenService.setHttpOnlyCookie(res, 'accessToken', newAccessToken, 5 * 60 * 1000);
                 this.tokenService.setHttpOnlyCookie(res, 'refreshToken', newRefreshToken, 24 * 60 * 60 * 1000);
