@@ -18,7 +18,7 @@ router.delete('/:id', LoginMiddleware.authorize, (req, res) => { // Cuando se ha
 });
 
 router.put('/:id', LoginMiddleware.authorize, (req, res) => {
-  controller.update(req, res)
+  controller.update(req, res);
 });
 
 router.get('/:id', LoginMiddleware.authorize, (req, res) => {

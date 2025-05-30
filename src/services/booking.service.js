@@ -30,7 +30,6 @@ export class BookingService extends BaseService {
   }
 
   async getByUserId(userId) {
-
     console.log("FECHA AHORA", new Date());
     return this.model.findAll({
       where: {
@@ -39,5 +38,13 @@ export class BookingService extends BaseService {
       },
       include: [{ model: Space }],
     });
+  }
+
+  async update(bookingId, { dateStart, dateEnd, assistants }) {
+    const updateFields = {};
+    if (dateStart) updateFields.dateStart = new Date(dateStart);
+    if (dateEnd) updateFields.dateEnd = new Date(dateEnd);
+    if (assistants !== undefined) updateFields.assistants = assistants;
+    return this.model.update(updateFields, { where: { id: bookingId } });
   }
 }

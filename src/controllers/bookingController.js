@@ -38,5 +38,20 @@ export class BookingController extends CrudController {
             return res.status(500).json({ message: "Error fetching user's bookings", error });
         }
     }
+
+    async update(req, res) {
+        try {
+            const bookingId = req.params.id;
+            const { dateStart, dateEnd, assistants } = req.body;
+            const updated = await this.service.update(bookingId, { dateStart, dateEnd, assistants });
+            if (updated[0] === 1) {
+                return res.json({ message: "Booking updated successfully" });
+            } else {
+                return res.status(404).json({ message: "Booking not found or not updated" });
+            }
+        } catch (error) {
+            return res.status(500).json({ message: "Error updating booking", error });
+        }
+    }
 }
 
