@@ -28,5 +28,15 @@ export class BookingController extends CrudController {
             return res.status(500).json({ message: "Error fetching bookings", error });
         }
     }
+
+    async getByUserId(req, res) {
+        try {
+            const userId = req.params.userId;
+            const bookings = await this.service.getByUserId(userId);
+            return res.json(bookings);
+        } catch (error) {
+            return res.status(500).json({ message: "Error fetching user's bookings", error });
+        }
+    }
 }
 

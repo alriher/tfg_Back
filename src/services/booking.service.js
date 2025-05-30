@@ -1,6 +1,7 @@
 import Booking from "../models/Booking.js";
 import { BaseService } from "./base.service.js";
 import { Op, fn, col, where } from "sequelize";
+import Space from "../models/Space.js"; // Import Space model for inclusion
 
 export class BookingService extends BaseService {
   constructor() {
@@ -25,6 +26,18 @@ export class BookingService extends BaseService {
         spaceId,
         [Op.and]: [where(fn("DATE", col("date_start")), date)],
       },
+    });
+  }
+
+  async getByUserId(userId) {
+
+    console.log("FECHA AHORA", new Date());
+    return this.model.findAll({
+      where: {
+        userId,
+        dateEnd: { [Op.gt]: new Date() },
+      },
+      include: [{ model: Space }],
     });
   }
 }

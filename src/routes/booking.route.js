@@ -24,6 +24,10 @@ router.put('/:id', LoginMiddleware.authorize, (req, res) => {
 router.get('/:id', LoginMiddleware.authorize, (req, res) => {
   controller.getBySpaceIdAndDate(req, res)
 });
+
+router.get('/user/:userId', LoginMiddleware.authorize, (req, res) => {
+  controller.getByUserId(req, res);
+});
 // // Ruta para obtener un usuario por email
 // router.get('/users/:email', handleGetUserByEmail);
 
