@@ -22,7 +22,7 @@ router.put('/:id', LoginMiddleware.authorize, (req, res) => {
 });
 
 router.get('/', (req, res) => {
-  controller.getAll(req, res)
+  controller.getPaginated(req, res);
 });
 
 router.get('/:id', (req, res) => {

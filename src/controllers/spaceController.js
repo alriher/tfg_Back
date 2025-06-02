@@ -11,5 +11,16 @@ export class SpaceController extends CrudController {
     get service() {
         return this._service;
     }
+
+    async getPaginated(req, res) {
+        try {
+            const page = parseInt(req.query.page) || 1;
+            const pageSize = parseInt(req.query.pageSize) || 15;
+            const result = await this.service.getPaginated(page, pageSize);
+            return res.json(result);
+        } catch (error) {
+            return res.status(500).json({ message: "Error fetching paginated spaces", error });
+        }
+    }
 }
 
