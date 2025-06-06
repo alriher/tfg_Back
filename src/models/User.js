@@ -51,6 +51,11 @@ const User = sequelize.define('User', {
     defaultValue: false,
     allowNull: false,
   },
+  isSpaceAdmin: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+    allowNull: false,
+  },
 }, {
   scopes: {
     withoutPassword: {

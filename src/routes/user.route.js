@@ -23,6 +23,13 @@ router.put('/:id', LoginMiddleware.authorize, (req, res) => {
   controller.update(req, res)
 });
 
+router.patch('/:id', LoginMiddleware.authorize, (req, res) => {
+  controller.patchUpdate(req, res);
+});
+
+router.get('/', LoginMiddleware.authorize, (req, res) => {
+  controller.getPaginated(req, res);
+});
 // // Ruta para obtener un usuario por email
 // router.get('/users/:email', handleGetUserByEmail);
 

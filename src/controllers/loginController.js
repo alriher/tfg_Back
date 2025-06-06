@@ -47,7 +47,7 @@ export class LoginController {
             this.tokenService.setHttpOnlyCookie(res, 'accessToken', accessToken, 5 * 60 * 1000);
             this.tokenService.setHttpOnlyCookie(res, 'refreshToken', refreshToken, 24 * 60 * 60 * 1000);
 
-            return res.json(await this.userService.getCuratedUser(user.id));
+            return res.json(await this.userService.getCuratedUserAdmin(user.id));
         }
         catch (error) {
             console.log(error);
