@@ -53,15 +53,9 @@ export class UserService extends BaseService {
   async getPaginated(page = 1, pageSize = 15, search = "") {
     const offset = (page - 1) * pageSize;
     const where = {};
-
-    console.log("Valor de search recibido:", search);
-
     if (search && search.trim() !== "") {
         where.username = { [Op.like]: `%${search}%` };
     }
-
-    console.log("Filtro where construido:", where);
-
     const { count, rows } = await this.model
         .scope(['withoutPassword', 'withoutAdmin'])
         .findAndCountAll({

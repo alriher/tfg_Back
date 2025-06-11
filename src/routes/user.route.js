@@ -27,9 +27,20 @@ router.patch('/:id', LoginMiddleware.authorize, (req, res) => {
   controller.patchUpdate(req, res);
 });
 
+// PATCH /users/profile/:id
+router.patch('/profile/:id', LoginMiddleware.authorize, (req, res) => {
+  controller.patchProfileUpdate(req, res);
+});
+
 router.get('/', LoginMiddleware.authorize, (req, res) => {
   controller.getPaginated(req, res);
 });
+
+// Cambiar contraseña de usuario
+router.post('/:id/change-password', LoginMiddleware.authorize, (req, res) => {
+  controller.changePassword(req, res);
+});
+
 // // Ruta para obtener un usuario por email
 // router.get('/users/:email', handleGetUserByEmail);
 

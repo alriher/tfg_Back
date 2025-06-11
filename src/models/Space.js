@@ -28,6 +28,10 @@ const Space = sequelize.define('Space', {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
+  description: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
   lat : {
     type: DataTypes.DOUBLE,
     allowNull: false,
@@ -45,7 +49,7 @@ const Space = sequelize.define('Space', {
     allowNull: false,
     defaultValue: false,
     field: 'is_slot_based'
-  }
+  },
 }, {
   timestamps: true, // Añade las columnas `createdAt` y `updatedAt`
   tableName: 'spaces', // Asegura que Sequelize usa el nombre correcto de la tabla
