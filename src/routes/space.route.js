@@ -8,7 +8,8 @@ const router = express.Router();
 console.log(controller);
 
 // Ruta para crear un nuevo espacio
-router.post('/', LoginMiddleware.authorize, (req, res) => { // Cuando se haga un post a /, se va a ejecutar el método create del controlador. 
+// Solo los space admins pueden crear espacios
+router.post('/', LoginMiddleware.authorize, LoginMiddleware.requireSpaceAdmin, (req, res) => {
   controller.create(req, res) 
 
 });

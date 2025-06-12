@@ -15,7 +15,7 @@ router.post('/', LoginMiddleware.authorize, (req, res) => { // Cuando se haga un
 });
 
 // /users/:id
-router.delete('/:id', LoginMiddleware.authorize, (req, res) => { // Cuando se haga un delete a /users/:id, se va a ejecutar el método delete del controlador.
+router.delete('/:id', LoginMiddleware.authorize, LoginMiddleware.requireAdmin, (req, res) => { // Cuando se haga un delete a /users/:id, se va a ejecutar el método delete del controlador.
   controller.delete(req, res)
 });
 
@@ -23,7 +23,7 @@ router.put('/:id', LoginMiddleware.authorize, (req, res) => {
   controller.update(req, res)
 });
 
-router.patch('/:id', LoginMiddleware.authorize, (req, res) => {
+router.patch('/:id', LoginMiddleware.authorize, LoginMiddleware.requireAdmin, (req, res) => {
   controller.patchUpdate(req, res);
 });
 
@@ -32,7 +32,8 @@ router.patch('/profile/:id', LoginMiddleware.authorize, (req, res) => {
   controller.patchProfileUpdate(req, res);
 });
 
-router.get('/', LoginMiddleware.authorize, (req, res) => {
+// Solo los admins pueden ver usuarios paginados y actualizar isSpaceAdmin
+router.get('/', LoginMiddleware.authorize, LoginMiddleware.requireAdmin, (req, res) => {
   controller.getPaginated(req, res);
 });
 
