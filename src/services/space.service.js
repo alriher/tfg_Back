@@ -25,4 +25,20 @@ export class SpaceService extends BaseService {
         spaces: rows
       };
     }
+
+    async getByUserPaginated(userId, page = 1, pageSize = 15) {
+      const offset = (page - 1) * pageSize;
+      const { count, rows } = await this.model.findAndCountAll({
+        where: { user_id: userId },
+        limit: pageSize,
+        offset,
+        order: [['id', 'ASC']]
+      });
+      return {
+        total: count,
+        page,
+        pageSize,
+        spaces: rows
+      };
+    }
 }

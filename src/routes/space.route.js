@@ -5,8 +5,6 @@ import { LoginMiddleware } from '../middlewares/login.middleware.js';
 const controller = new SpaceController();
 const router = express.Router();
 
-console.log(controller);
-
 // Ruta para crear un nuevo espacio
 // Solo los space admins pueden crear espacios
 router.post('/', LoginMiddleware.authorize, LoginMiddleware.requireSpaceAdmin, (req, res) => {
@@ -28,6 +26,11 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   controller.getById(req, res)
+});
+
+// Obtener espacios paginados por user_id
+router.get('/user/:userId', LoginMiddleware.authorize, LoginMiddleware.requireSpaceAdmin, (req, res) => {
+  controller.getByUserPaginated(req, res);
 });
 
 // // Ruta para obtener un usuario por email
