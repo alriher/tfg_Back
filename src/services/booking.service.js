@@ -2,6 +2,7 @@ import Booking from "../models/Booking.js";
 import { BaseService } from "./base.service.js";
 import { Op, fn, col, where } from "sequelize";
 import Space from "../models/Space.js"; // Import Space model for inclusion
+import User from "../models/User.js";
 
 export class BookingService extends BaseService {
   constructor() {
@@ -55,12 +56,63 @@ export class BookingService extends BaseService {
       limit: pageSize,
       offset,
       order: [["id", "ASC"]],
+      include: [
+        { model: User, attributes: { exclude: ['password'] } },
+        { model: Space }
+      ]
+    });
+    // Mapear para devolver el usuario como userId y el espacio como spaceId
+    const bookings = rows.map(b => {
+      const booking = b.toJSON();
+      if (booking.User) {
+        booking.userId = booking.User;
+        delete booking.User;
+      }
+      if (booking.Space) {
+        booking.spaceId = booking.Space;
+        delete booking.Space;
+      }
+      return booking;
     });
     return {
       total: count,
       page,
       pageSize,
-      bookings: rows,
+      bookings,
+    };
+  }
+
+  async getByUserPaginated(userId, page = 1, pageSize = 15) {
+    page = parseInt(page) || 1;
+    pageSize = parseInt(pageSize) || 15;
+    const offset = (page - 1) * pageSize;
+    const { count, rows } = await this.model.findAndCountAll({
+      where: { userId },
+      limit: pageSize,
+      offset,
+      order: [["id", "ASC"]],
+      include: [
+        { model: User, attributes: { exclude: ['password'] } },
+        { model: Space }
+      ]
+    });
+    const bookings = rows.map(b => {
+      const booking = b.toJSON();
+      if (booking.User) {
+        booking.userId = booking.User;
+        delete booking.User;
+      }
+      if (booking.Space) {
+        booking.spaceId = booking.Space;
+        delete booking.Space;
+      }
+      return booking;
+    });
+    return {
+      total: count,
+      page,
+      pageSize,
+      bookings,
     };
   }
 }

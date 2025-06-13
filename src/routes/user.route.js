@@ -37,6 +37,10 @@ router.get('/', LoginMiddleware.authorize, LoginMiddleware.requireAdmin, (req, r
   controller.getPaginated(req, res);
 });
 
+router.get('/:id', LoginMiddleware.authorize, LoginMiddleware.requireAdmin, (req, res) => {
+  controller.getById(req, res)
+});
+
 // Cambiar contraseña de usuario
 router.post('/:id/change-password', LoginMiddleware.authorize, (req, res) => {
   controller.changePassword(req, res);

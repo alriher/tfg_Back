@@ -65,5 +65,17 @@ export class BookingController extends CrudController {
             return res.status(500).json({ message: "Error fetching bookings by space", error });
         }
     }
+
+    async getByUserPaginated(req, res) {
+        try {
+            const userId = req.params.userId;
+            const page = parseInt(req.query.page) || 1;
+            const pageSize = parseInt(req.query.pageSize) || 15;
+            const result = await this.service.getByUserPaginated(userId, page, pageSize);
+            return res.json(result);
+        } catch (error) {
+            return res.status(500).json({ message: "Error fetching user's bookings", error });
+        }
+    }
 }
 

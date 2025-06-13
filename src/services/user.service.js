@@ -39,14 +39,20 @@ export class UserService extends BaseService {
     return await this.model.findOne({ where: { email } });
   }
 
+  async getById(id) {
+    return await this.model
+      .scope('withoutPassword', 'withoutAdmin')
+      .findByPk(id);
+  }
+
   async getCuratedUser(id) {
     return await this.model
-      .scope(["withoutPassword", "withoutAdmin"])
+      .scope('withoutPassword', 'withoutAdmin')
       .findByPk(id);
   }
   async getCuratedUserAdmin(id) {
     return await this.model
-      .scope(["withoutPassword"])
+      .scope('withoutPassword')
       .findByPk(id);
   }
 
