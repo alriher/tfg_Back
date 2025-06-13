@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/database.js";
+import User from "./User.js"; // Importa el modelo User
 
 const Space = sequelize.define(
   "Space",
@@ -70,5 +71,7 @@ const Space = sequelize.define(
     underscored: true,
   }
 );
+
+Space.belongsTo(User, { foreignKey: "user_id", onDelete: "CASCADE" });
 
 export default Space;

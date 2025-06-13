@@ -37,7 +37,7 @@ export class LoginMiddleware {
     }
 
     static requireSpaceAdmin(req, res, next) {
-        if (!req.user || !req.user.isSpaceAdmin) {
+        if (!req.user || (!req.user.isSpaceAdmin && !req.user.isAdmin)) {
             return res.status(403).json({ message: "Only space admins can perform this action" });
         }
         next();

@@ -12,7 +12,7 @@ router.post('/', LoginMiddleware.authorize, LoginMiddleware.requireSpaceAdmin, (
 
 });
 
-router.delete('/:id', LoginMiddleware.authorize, (req, res) => { // Cuando se haga un delete a /spaces/:id, se va a ejecutar el método delete del controlador.
+router.delete('/:id', LoginMiddleware.authorize, LoginMiddleware.requireSpaceAdmin, (req, res) => { // Cuando se haga un delete a /spaces/:id, se va a ejecutar el método delete del controlador.
   controller.delete(req, res)
 });
 

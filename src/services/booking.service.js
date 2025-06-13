@@ -47,4 +47,20 @@ export class BookingService extends BaseService {
     if (assistants !== undefined) updateFields.assistants = assistants;
     return this.model.update(updateFields, { where: { id: bookingId } });
   }
+
+  async getBySpacePaginated(spaceId, page = 1, pageSize = 15) {
+    const offset = (page - 1) * pageSize;
+    const { count, rows } = await this.model.findAndCountAll({
+      where: { spaceId },
+      limit: pageSize,
+      offset,
+      order: [["id", "ASC"]],
+    });
+    return {
+      total: count,
+      page,
+      pageSize,
+      bookings: rows,
+    };
+  }
 }

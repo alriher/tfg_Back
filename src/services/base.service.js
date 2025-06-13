@@ -30,12 +30,17 @@ export class BaseService {
 
     async delete(id) {
         try {
+            console.log("[BaseService] Intentando eliminar espacio con id:", id);
             const model = await this.model.findByPk(id);
             if(model) {
-                return await this.model.destroy({ where: { id } });
+                const result = await this.model.destroy({ where: { id } });
+                console.log("[BaseService] Resultado destroy:", result);
+                return result;
+            } else {
+                console.log("[BaseService] No se encontró el modelo con id:", id);
             }
         } catch (error) {
-            console.error(error);
+            console.error("[BaseService] Error al eliminar:", error);
         }
     }
 

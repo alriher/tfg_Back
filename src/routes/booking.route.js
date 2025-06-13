@@ -28,6 +28,10 @@ router.get('/:id', LoginMiddleware.authorize, (req, res) => {
 router.get('/user/:userId', LoginMiddleware.authorize, (req, res) => {
   controller.getByUserId(req, res);
 });
+
+router.get('/space/:spaceId', LoginMiddleware.authorize, (req, res) => {
+  controller.getBySpacePaginated(req, res);
+});
 // // Ruta para obtener un usuario por email
 // router.get('/users/:email', handleGetUserByEmail);
 

@@ -34,9 +34,12 @@ export class CrudController {
 
     async delete(req, res) {
         try {
+            console.log("[CrudController] Intentando eliminar espacio con id:", req.params.id);
             const deletedModel = await this.service.delete(req.params.id);
+            console.log("[CrudController] Resultado delete:", deletedModel);
             res.json(deletedModel);
         } catch (error) {
+            console.log("[CrudController] Error al eliminar:", error);
             res.json({ message: error.message });
         }
     };
