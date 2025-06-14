@@ -27,17 +27,18 @@ export class BookingService extends BaseService {
         spaceId,
         [Op.and]: [where(fn("DATE", col("date_start")), date)],
       },
+      order: [["dateStart", "ASC"]],
     });
   }
 
   async getByUserId(userId) {
-    console.log("FECHA AHORA", new Date());
     return this.model.findAll({
       where: {
         userId,
         dateEnd: { [Op.gt]: new Date() },
       },
       include: [{ model: Space }],
+      order: [["dateStart", "ASC"]],
     });
   }
 
@@ -50,18 +51,22 @@ export class BookingService extends BaseService {
   }
 
   async getBySpacePaginated(spaceId, page = 1, pageSize = 15) {
+    page = parseInt(page) || 1;
+    pageSize = parseInt(pageSize) || 15;
     const offset = (page - 1) * pageSize;
     const { count, rows } = await this.model.findAndCountAll({
-      where: { spaceId },
+      where: {
+        spaceId,
+        dateEnd: { [Op.gt]: new Date() }
+      },
       limit: pageSize,
       offset,
-      order: [["id", "ASC"]],
+      order: [["dateStart", "ASC"]],
       include: [
         { model: User, attributes: { exclude: ['password'] } },
         { model: Space }
       ]
     });
-    // Mapear para devolver el usuario como userId y el espacio como spaceId
     const bookings = rows.map(b => {
       const booking = b.toJSON();
       if (booking.User) {
@@ -87,10 +92,13 @@ export class BookingService extends BaseService {
     pageSize = parseInt(pageSize) || 15;
     const offset = (page - 1) * pageSize;
     const { count, rows } = await this.model.findAndCountAll({
-      where: { userId },
+      where: {
+        userId,
+        dateEnd: { [Op.gt]: new Date() }
+      },
       limit: pageSize,
       offset,
-      order: [["id", "ASC"]],
+      order: [["dateStart", "ASC"]],
       include: [
         { model: User, attributes: { exclude: ['password'] } },
         { model: Space }
