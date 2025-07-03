@@ -50,7 +50,6 @@ const Booking = sequelize.define(
     underscored: true,
   }
 );
-
 // Establece las relaciones
 Booking.belongsTo(User, { foreignKey: "userId", onDelete: "CASCADE" });
 Booking.belongsTo(Space, { foreignKey: "spaceId", onDelete: "CASCADE" });

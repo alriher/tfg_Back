@@ -5,11 +5,8 @@ import app from './server.js';
 //Activa la lectura del archivo .env.
 dotenv.config()
 
-//app listen -- Define el puerto donde el servidor va a escuchar. Si no se define en el .env, usará el 3000 por defecto.
+//app listen -- Define el puerto donde el servidor va a escuchar.
 const port = process.env.PORT || 3000;
-
-//Debug
-console.log("PUERTOOO: " + port);
 
 //Esto arranca el servidor. Le dice: "¡Escucha en este puerto por si alguien se conecta!"
 app.listen(port, async () => {

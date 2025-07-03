@@ -24,9 +24,7 @@ app.use(
   })
 );
 
-
 //Prepara el servidor para leer cookies y entender datos en formato JSON
-
 app.use(cookieParser());
 app.use(express.json());
 
@@ -37,5 +35,6 @@ app.use("/spaces", spaceRoutes); //Todo lo que hay creado en spaceRoutes se va a
 app.use("/bookings", bookingRoutes);
 app.use("/", loginRoutes);
 
-
 export default app;
+
+

@@ -44,7 +44,6 @@ export class LoginMiddleware {
     }
 
     static requireAdmin(req, res, next) {
-        console.log("AQUI AQUI AQUI", req.user);
         if (!req.user || !req.user.isAdmin) {
             return res.status(403).json({ message: "Only admins can perform this action" });
         }

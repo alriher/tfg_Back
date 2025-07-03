@@ -51,12 +51,4 @@ export class BaseService {
     async getAll() {
         return await this.model.findAll();
     }
-
-
-
-    
-
-    // async allUsersWithoutPassword() {
-    //     return await this._model.scope(['withoutPassword', 'withoutAdmin']).findAll()
-    // }
 }
