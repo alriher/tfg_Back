@@ -54,7 +54,7 @@ const Space = sequelize.define(
       allowNull: false,
     },
     img: {
-      type: DataTypes.TEXT(255),
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     isSlotBased: {
