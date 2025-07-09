@@ -3,13 +3,16 @@ content-type: application/json
 
 {
     "name": "Pista de Tenis",
+    "user_id": "1",
     "address": "Polideportivo La Alcayna",
     "capacity": "4",
     "provincia": "Murcia",
     "localidad": "Molina de Segura",
+    "description": "Pista de tenis cubierta con césped artificial, iluminación y vestuarios.",
     "lat": "38.08765694634773", 
     "lon": "-1.1580197938437922",
-    "img": "images/test.jpg"
+    "img": "https://res.cloudinary.com/dpot32ylv/image/upload/v1749843856/cgtk7lp8giynnecu3y2u.jpg",
+    "is_slot_based": "1"
 }
 
 // CTRL + ALT + R to send the request
