@@ -31,6 +31,7 @@ export class RefreshTokenService extends BaseService {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             maxAge,
+            sameSite: 'None'
         });
     }
 
