@@ -17,6 +17,7 @@ const sequelize = new Sequelize(
     host: DATABASE_HOST,
     port: DATABASE_PORT,
     dialect: "mysql",
+    timezone: '+00:00', // Configura la zona horaria a UTC
   }
 );
 
