@@ -20,7 +20,12 @@ const sequelize = new Sequelize(
   }
 );
 
-
-
+sequelize.query('SELECT @@global.time_zone, @@session.time_zone;', {
+  type: sequelize.QueryTypes.SELECT
+}).then(result => {
+  console.log('Zona horaria MySQL:', result);
+}).catch(error => {
+  console.error('Error al obtener zona horaria:', error);
+});
 
 export default sequelize;
