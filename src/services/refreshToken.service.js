@@ -30,6 +30,7 @@ export class RefreshTokenService extends BaseService {
         res.cookie(name, value, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
+            domain: process.env.DOMAIN,
             maxAge,
             sameSite: process.env.NODE_ENV === 'production' ? 'Lax' : 'None',
         });
